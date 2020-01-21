@@ -5,12 +5,14 @@ import random
 
 
 #wikipedia code analyzer/webscraper
+#base function to return the summary of the first sentence of each word
+#used in -define 
 def wiki_summary(arg):
     definition = wikipedia.summary(arg, sentences=1, chars=100, 
     auto_suggest=True, redirect=True)
 
     return definition
-
+#rock paper scissors code
 #rps code that determines the winner
 def rps(arg, arg2):
         if arg == 'rock':
@@ -83,23 +85,27 @@ class custombotbydop(discord.Client):
 
             except asyncio.TimeoutError:
                 await self.send_message(message.channel, 'My head just broke to be honest')
-
+        
         #basic hello command
+        #greets the user by mentioning their profile as well as a warm message
         if words[0].lower() =='-hello':
             msg = 'Hello {0.author.mention} what is up pal?'.format(message)
             await self.send_message(message.channel, msg)
 
         #wikipedia search command
+        #uses the function above to call basic summaries
         if words[0].lower() == "-define":
             important_words = words[1:]
             await self.send_message(message.channel, wiki_summary(important_words))
         
         #Lists out all possible commands
+        #users can use this in order to get help on what to use
         if words[0].lower() == "-help":
             msg = "```Here is a list of commands that can be useful:\n\n\n-help will grant a list of commands\n\n-hello will greet the user\n\n-define [content] will define any term besides umbrella terms\n\n-flipcoin will flip a coin and print heads or tails\n\n-dice will produce a random value between 1 and 6 inclusive\n\n-about will tell you about the creation of this bot\n\n-rps [rock,paper,scissors] will play a game of rock paper scissors\n\n\nFinally, if you want to have a nice conversation with the robot, you can simply mention him (@gok).```".format(message)
             await self.send_message(message.channel, msg)
 
         #flips a coin and displays heads or tails
+        #outputs a result depending on the randomizer
         if words[0].lower() == "-flipcoin":
             value=random.randint(0,1)
             msg=""
@@ -112,17 +118,20 @@ class custombotbydop(discord.Client):
             await self.send_message(message.channel, msg)
         
         #rolls a 6 sided dice and displays the number
+        #uses the same function as the coin flip except with a larger range
         if words[0].lower() =="-dice":
             value=random.randint(1,6)
             msg=value
             await self.send_message(message.channel, msg)
 
         #about gives a run down on the creation of the bot
+        #essentially a rundown of what it contains
         if words[0].lower() =="-about":
             msg="The creators, Hae Chan (dop) and Keagan (gek) both worked on this program extensively over the last two weeks in order to create a basic yet versatile discord robot with numerous unique features, including a working chatbot. Hae Chan programmed the bulk of the commands along with the web scraping capabilites and gek primarily coded the artificial intelligent robot that takes online data and transfers it to discord.".format(message)
             await self.send_message(message.channel, msg)
 
         #rock paper scissors basic game
+        #calls back the function above in order to determine winner
         if words[0].lower() == "-rps":
             important_words = words[1:]
             important_word=words[1]
@@ -155,8 +164,3 @@ http = aiohttp.ClientSession()
 
 #connects specific bot with code
 custombotbydop().run('TOKEN')
-
-
-
-
-
