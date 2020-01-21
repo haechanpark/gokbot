@@ -61,7 +61,7 @@ class custombotbydop(discord.Client):
         print('Logged in as {0.user.name} (ID: {0.user.id} ) | {1} servers'.format(self, str(len(self.servers))))
         await self.change_presence(game=discord.Game(name='with my gek and dop'))
 
-    #commands and fucntions
+    #commands and functions
     #includes custom commands and artificial intelligence
     async def on_message(self, message):
         words = message.content.split()
